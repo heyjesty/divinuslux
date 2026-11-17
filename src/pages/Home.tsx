@@ -5,7 +5,7 @@ import { Seo, organizationSchema, professionalServiceSchema } from '../component
 import { Hero } from '../components/Hero';
 import { SectionHeading } from '../components/SectionHeading';
 import { Reveal, ImageReveal } from '../components/Reveal';
-import { ServiceList } from '../components/ServiceList';
+import { ServiceStack } from '../components/ServiceStack';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProcessTimeline } from '../components/ProcessTimeline';
 import { WhyUs } from '../components/WhyUs';
@@ -58,7 +58,7 @@ export default function Home() {
             }
           />
           <div className="mt-16 md:mt-24">
-            <ServiceList />
+            <ServiceStack />
           </div>
         </div>
       </section>

@@ -115,6 +115,33 @@
   opacity: 0;
   animation: hero-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+.hero-orbit-in {
+  opacity: 0;
+  animation: hero-orbit-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes hero-orbit-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82) rotate(-12deg);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes orbit-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+.no-intro .hero-orbit-in,
 .no-intro .hero-word,
 .no-intro .hero-in {
   animation-delay: 0.1s !important;

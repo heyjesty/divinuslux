@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { VideoBackground } from './VideoBackground';
+import { HeroOrbit } from './HeroOrbit';
 import { Button } from './Button';
 import { company } from '../data/company';
 import { scrollToTarget } from '../lib/scroll';
@@ -18,6 +19,7 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '22%']);
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '-12%']);
+  const orbitY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%']);
   const fadeOut = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   let w = 0;
@@ -25,6 +27,12 @@ export function Hero() {
     <section ref={ref} className="grain relative flex min-h-[100svh] flex-col overflow-hidden" aria-labelledby="hero-title">
       <motion.div className="absolute inset-0 will-change-transform" style={{ y: bgY }}>
         <VideoBackground src={company.heroVideo || undefined} poster={company.heroPoster} />
+      </motion.div>
+
+      <motion.div className="absolute inset-0" style={{ y: orbitY, opacity: fadeOut }}>
+        <div className="container-site relative h-full">
+          <HeroOrbit delay={BASE_DELAY + 0.3} />
+        </div>
       </motion.div>
 
       <motion.div style={{ y: contentY, opacity: fadeOut }} className="container-site relative z-10 flex flex-1 flex-col justify-end pb-16 pt-32 sm:pb-28 sm:pt-36 md:pb-32">
@@ -50,11 +58,11 @@ export function Hero() {
           ))}
         </h1>
 
-        <div className="mt-8 grid gap-8 sm:mt-12 sm:gap-10 md:grid-cols-12 md:items-end">
-          <p className="hero-in max-w-xl text-[17px] leading-relaxed text-bone/70 md:col-span-6 md:text-lg" style={{ animationDelay: `${BASE_DELAY + 0.6}s` }}>
+        <div className="mt-8 flex max-w-2xl flex-col gap-8 sm:mt-10 lg:max-w-[52%]">
+          <p className="hero-in max-w-xl text-[17px] leading-relaxed text-bone/70 md:text-lg" style={{ animationDelay: `${BASE_DELAY + 0.6}s` }}>
             We build intelligent digital solutions, powerful software and growth-driven experiences that help businesses move forward.
           </p>
-          <div className="hero-in flex flex-col gap-3 sm:flex-row sm:flex-wrap md:col-span-6 md:justify-end" style={{ animationDelay: `${BASE_DELAY + 0.75}s` }}>
+          <div className="hero-in flex flex-col gap-3 sm:flex-row sm:flex-wrap" style={{ animationDelay: `${BASE_DELAY + 0.75}s` }}>
             <Button to="/projects" variant="primary" block>
               Explore Our Work
             </Button>
@@ -64,15 +72,6 @@ export function Hero() {
           </div>
         </div>
       </motion.div>
-
-      {/* floating meta */}
-      <div className="pointer-events-none absolute right-6 top-1/2 z-10 hidden -translate-y-1/2 lg:block xl:right-12">
-        <div className="hero-in" style={{ animationDelay: `${BASE_DELAY + 0.9}s` }}>
-        <div className="glass animate-floaty rounded-2xl p-4">
-          <img src={company.mark} alt="" width={44} height={44} className="h-11 w-11" />
-        </div>
-        </div>
-      </div>
 
       <div className="container-site relative z-10 flex items-center justify-between pb-8 text-[11px] uppercase tracking-[0.24em] text-bone-dim">
         <span className="hero-in hidden sm:block" style={{ animationDelay: `${BASE_DELAY + 1}s` }}>
